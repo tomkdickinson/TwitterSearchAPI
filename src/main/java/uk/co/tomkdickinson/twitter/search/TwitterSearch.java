@@ -1,31 +1,25 @@
-package com.tomkdickinson.twitter.search;
+package uk.co.tomkdickinson.twitter.search;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import org.apache.http.client.utils.URIBuilder;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
-import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.List;
 
 public abstract class TwitterSearch {
 
-    public final static String TYPE_PARAM = "f";
-    public final static String QUERY_PARAM = "q";
-    public final static String SCROLL_CURSOR_PARAM = "scroll_cursor";
-    public final static String TWITTER_SEARCH_URL = "https://twitter.com/i/search/timeline";
-
     public TwitterSearch() {
+
     }
 
     public abstract boolean saveTweets(List<Tweet> tweets);
 
-    public void search(final String query, final long rateDelay) throws MalformedURLException, InvalidQueryException, URISyntaxException {
+    public void search(final String query, final long rateDelay) throws InvalidQueryException {
         TwitterResponse response;
         String scrollCursor = null;
         URL url = constructURL(query, scrollCursor);
@@ -60,17 +54,27 @@ public abstract class TwitterSearch {
         return null;
     }
 
-    public static URL constructURL(final String query, final String scrollCursor) throws MalformedURLException, InvalidQueryException, URISyntaxException {
+    public final static String TYPE_PARAM = "f";
+    public final static String QUERY_PARAM = "q";
+    public final static String SCROLL_CURSOR_PARAM = "scroll_cursor";
+    public final static String TWITTER_SEARCH_URL = "https://twitter.com/i/search/timeline";
+
+    public static URL constructURL(final String query, final String scrollCursor) throws InvalidQueryException {
         if(query==null || query.isEmpty()) {
-            throw new InvalidQueryException();
+            throw new InvalidQueryException(query);
         }
-        URIBuilder uriBuilder;
-        uriBuilder = new URIBuilder(TWITTER_SEARCH_URL);
-        uriBuilder.addParameter(QUERY_PARAM,query);
-        uriBuilder.addParameter(TYPE_PARAM,"realtime");
-        if(scrollCursor!=null) {
-            uriBuilder.addParameter(SCROLL_CURSOR_PARAM, scrollCursor);
+        try {
+            URIBuilder uriBuilder;
+            uriBuilder = new URIBuilder(TWITTER_SEARCH_URL);
+            uriBuilder.addParameter(QUERY_PARAM, query);
+            uriBuilder.addParameter(TYPE_PARAM, "realtime");
+            if (scrollCursor != null) {
+                uriBuilder.addParameter(SCROLL_CURSOR_PARAM, scrollCursor);
+            }
+            return uriBuilder.build().toURL();
+        } catch(MalformedURLException | URISyntaxException e) {
+            e.printStackTrace();
+            throw new InvalidQueryException(query);
         }
-        return uriBuilder.build().toURL();
     }
 }

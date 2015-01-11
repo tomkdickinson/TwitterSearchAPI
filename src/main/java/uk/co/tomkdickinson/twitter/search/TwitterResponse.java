@@ -1,4 +1,4 @@
-package com.tomkdickinson.twitter.search;
+package uk.co.tomkdickinson.twitter.search;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;

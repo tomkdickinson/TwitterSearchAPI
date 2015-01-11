@@ -1,4 +1,4 @@
-package com.tomkdickinson.twitter.search;
+package uk.co.tomkdickinson.twitter.search;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -6,7 +6,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class TwitterSearchImpl extends TwitterSearch {
 
     private final AtomicInteger counter = new AtomicInteger();
-    private final int maxTweets = 500;
 
     @Override
     public boolean saveTweets(List<Tweet> tweets) {
@@ -21,8 +20,8 @@ public class TwitterSearchImpl extends TwitterSearch {
         return true;
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws InvalidQueryException {
         TwitterSearch twitterSearch = new TwitterSearchImpl();
-        twitterSearch.search("#facebooklookback", 2000);
+        twitterSearch.search("babylon 5", 2000);
     }
 }

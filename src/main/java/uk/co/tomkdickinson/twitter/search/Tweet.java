@@ -1,10 +1,6 @@
-package com.tomkdickinson.twitter.search;
-
+package uk.co.tomkdickinson.twitter.search;
 import java.util.Date;
 
-/**
- * Created by Tom on 09/01/2015.
- */
 public class Tweet {
 
     private String id;
