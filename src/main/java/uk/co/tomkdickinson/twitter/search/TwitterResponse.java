@@ -12,21 +12,16 @@ public class TwitterResponse {
 
     private boolean has_more_items;
     private String items_html;
-    private boolean is_scrolling_request;
-    private boolean is_refresh_request;
-    private String scroll_cursor;
+    private String min_position;
     private String refresh_cursor;
     private long focused_refresh_interval;
 
     public TwitterResponse() {
     }
 
-    public TwitterResponse(boolean has_more_items, String items_html, boolean is_scrolling_request, boolean is_refresh_request, String scroll_cursor, String refresh_cursor, long focused_refresh_interval) {
+    public TwitterResponse(boolean has_more_items, String items_html, String min_position, String refresh_cursor, long focused_refresh_interval) {
         this.has_more_items = has_more_items;
         this.items_html = items_html;
-        this.is_scrolling_request = is_scrolling_request;
-        this.is_refresh_request = is_refresh_request;
-        this.scroll_cursor = scroll_cursor;
         this.refresh_cursor = refresh_cursor;
         this.focused_refresh_interval = focused_refresh_interval;
     }
@@ -47,28 +42,12 @@ public class TwitterResponse {
         this.items_html = items_html;
     }
 
-    public boolean isIs_scrolling_request() {
-        return is_scrolling_request;
+    public String getMin_position() {
+        return min_position;
     }
 
-    public void setIs_scrolling_request(boolean is_scrolling_request) {
-        this.is_scrolling_request = is_scrolling_request;
-    }
-
-    public boolean isIs_refresh_request() {
-        return is_refresh_request;
-    }
-
-    public void setIs_refresh_request(boolean is_refresh_request) {
-        this.is_refresh_request = is_refresh_request;
-    }
-
-    public String getScroll_cursor() {
-        return scroll_cursor;
-    }
-
-    public void setScroll_cursor(String scroll_cursor) {
-        this.scroll_cursor = scroll_cursor;
+    public void setMin_position(String min_position) {
+        this.min_position = min_position;
     }
 
     public String getRefresh_cursor() {

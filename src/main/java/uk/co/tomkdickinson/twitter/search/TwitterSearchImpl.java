@@ -22,6 +22,6 @@ public class TwitterSearchImpl extends TwitterSearch {
 
     public static void main(String[] args) throws InvalidQueryException {
         TwitterSearch twitterSearch = new TwitterSearchImpl();
-        twitterSearch.search("babylon 5", 2000);
+        twitterSearch.search("babylon 5", 2);
     }
 }
