@@ -50,10 +50,19 @@ public abstract class TwitterSearch {
             Gson gson = new Gson();
             return gson.fromJson(reader, TwitterResponse.class);
         } catch(IOException e) {
-            e.printStackTrace();
+            // If we get an IOException, sleep for 5 seconds and retry.
+            System.err.println("Could not connect to Twitter. Retrying in 5 seconds.");
+            try {
+                Thread.sleep(5000);
+                return executeSearch(url);
+            } catch (InterruptedException e2) {
+                e.printStackTrace();
+            }
         } finally {
             try {
-                reader.close();
+                if(reader!=null) {
+                    reader.close();
+                }
             } catch(NullPointerException | IOException e) {
                 e.printStackTrace();
             }
