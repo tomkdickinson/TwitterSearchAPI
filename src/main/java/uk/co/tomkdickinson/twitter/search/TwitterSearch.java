@@ -38,8 +38,9 @@ public abstract class TwitterSearch {
                 }
                 String maxPosition = "TWEET-" + maxTweet + "-" + minTweet;
                 url = constructURL(query, maxPosition);
+            } else {
+                continueSearch = false;
             }
-
         }
     }
 
